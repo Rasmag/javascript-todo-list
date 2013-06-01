@@ -130,13 +130,22 @@ _.extend(Backbone.LocalStorage.prototype, {
           var result = JSON.parse(this.localStorage().getItem(this.name+"-"+id));
 
           //@jandersonfc implement custom filter, simulate filter here.
-          if ((this.name == 'item') && (options.data.list)){
-            if (result.list.id == options.data.list){
+          if ((this.name == 'item') && (options.data)){
+            var returnOk = true;
+            if ((options.data.done != undefined) && (result.done != options.data.done)){
+              returnOk = false;
+            }
+            if ((options.data.list != undefined) && (result.list.id != options.data.list)){
+              returnOk = false
+            }
+            if (returnOk){
               return result;
             }
-          }else {
-            return result;  
+
+          } else {
+            return result;
           }
+
         }, this)
         .compact()
         .value();

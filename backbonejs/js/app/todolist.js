@@ -5,7 +5,21 @@ var AppRouter = Backbone.Router.extend({
     routes:{
         "":"list",
         "lists/new":"newList",
-        "lists/:listId/items":"todo"
+        "lists/:listId/items":"todo",
+        "lists/:listId/edit":"edit"       
+    },
+
+    edit: function(listId){
+        if (this.listCollection){
+            this.list = this.listCollection.get(listId);
+        } else {
+            this.list = new List({id: listId});
+            this.list.fetch();
+        }      
+        this.itemCollection = new ItemCollection();
+        this.editListView = new EditListView({model: this.itemCollection},this.list);
+        $('#content').html(this.editListView.render().el);
+        this.itemCollection.fetch({data: { list: listId, done: false },processData:true});
     },
 
     list:function () {

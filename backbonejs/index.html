@@ -99,12 +99,15 @@
         <div class="row">
             <center>
                 <div class="well well-small well-radius span3" >
-                    <h4><a href="#/">My Lists</a> <small><b>this list:</b> <a href="#/lists/<%= list.id %>/edit">edit</a></small></h4>
+                    <h4><a href="#/">My Lists</a> <small><b> This list:</b> <a href="#/lists/<%= list.id %>/edit">edit</a></small></h4>
                 </div>
             </center>
         </div>
 
         <h4><%= list.name %></h4>
+        <p class= "muted" >
+            <%= list.description %>
+        </p>
 
         <div class="row">
             <div class="span7">
@@ -125,20 +128,54 @@
         </div>
     </script>
 
+    <script type="text/template" id="edit-list">
+        
+        <div class="row">
+            <center>
+                <div class="well well-small well-radius span3" >
+                    <h4>Edit this List:<small> or <a href="#/"> Cancel</a></small></h4>
+                </div>
+            </center>
+
+        </div>
+        <hr>        
+
+        <div class="row" >
+            <form name="form-editList" id="form-editList" action="#">
+
+                <label><h5><small>TITLE</small></h5></label>                
+                <input type="text" id="nameTask" class="span5" value="<%= list.name %>" required >
+
+                <label><h5><small>ITEMS</small></h5></label>
+                <div id="edit-items-opened"></div>
+
+                <label><h5><small>DESCRIPTION/NOTES (optional)</small></h5></label>                
+                <textarea id="description" class="span5"></textarea><br>
+                               
+                <button type="submit" class="btn btn-primary btn-mini btn-radius">Salve this list</button> or <a href="#/">Cancel</a>                        
+            </form>
+        </div>
+    </script>
+
+    <script type="text/template" id="edit-input-item">
+        <input type="text" id="item-<%= item.id %>" class="span5 itemTask" value="<%= item.name %>" required >
+
+    </script>
+
     <!-- LIBS -->
     <script src="js/lib/jquery-1.7.2.min.js"></script>
     <script src="js/lib/bootstrap.js"></script>
     <script src="js/lib/underscore.js"></script>
     <script src="js/lib/backbone.js"></script>
     
-    <!-- MOCKS -->
+    <!-- MOCKS 
     <script src="js/app/model/mock/localstorage-mock.js"></script>
     <script src="js/app/model/mock/list-mock.js"></script>
-    <script src="js/app/model/mock/item-mock.js"></script> 
+    <script src="js/app/model/mock/item-mock.js"></script> -->
     
-    <!-- MODELS 
+    <!-- MODELS -->
     <script src="js/app/model/list-model.js"></script>
-    <script src="js/app/model/item-model.js"></script> -->
+    <script src="js/app/model/item-model.js"></script>
 
     <!-- VIEWS -->
     <script src="js/app/view/list-view.js"></script>
