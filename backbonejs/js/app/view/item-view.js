@@ -64,6 +64,7 @@ window.ItemView = Backbone.View.extend({
     createItem: function(){
         var item = new Item({
             name:$('#name').val(),
+            done: false,
             list:{id: this.list.get('id')}
         });
         this.model.create(item);
